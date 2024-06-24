@@ -2,41 +2,33 @@ import { AxiosError, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import { api } from "../api";
 
-interface Platform {
-  id: number;
-  slug: string;
-  name: string;
-}
-
-export interface Game {
+export interface Genre {
   id: number;
   name: string;
   slug: string;
-  background_image: string;
-  platforms: { platform: Platform }[];
-  rating: number;
+  image_background: string;
 }
 
-interface FetchGamesResponse {
+interface FetchGenreResponse {
   count: number;
-  results: Game[];
+  results: Genre[];
 }
 
-function useGames() {
-  const [games, setGames] = useState<Game[]>([]);
+function useGenre() {
+  const [genre, setGenre] = useState<Genre[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    const fetchGames = async () => {
+    const fetchGenre = async () => {
       setLoading(true);
       try {
-        const { data } = await api.get<FetchGamesResponse>("/games", {
+        const { data } = await api.get<FetchGenreResponse>("/genres", {
           signal: controller.signal,
         });
-        setGames(data.results);
+        setGenre(data.results);
         setError(null);
         setLoading(false);
       } catch (error) {
@@ -48,7 +40,7 @@ function useGames() {
       }
     };
 
-    fetchGames();
+    fetchGenre();
 
     return () => {
       controller.abort();
@@ -56,10 +48,10 @@ function useGames() {
   }, []);
 
   return {
-    games,
+    genre,
     error,
     loading,
   };
 }
 
-export default useGames;
+export default useGenre;

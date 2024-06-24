@@ -2,7 +2,6 @@ import { Star } from "lucide-react";
 import { Game } from "../../app/services/api/hooks/useGames";
 
 export default function GameItem({ game }: { game: Game }) {
-  console.log(game);
   return (
     <li className="flex h-full w-full cursor-pointer flex-col gap-2 overflow-hidden rounded-md bg-neutral-700 md:h-[320px]">
       <img

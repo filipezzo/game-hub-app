@@ -1,4 +1,5 @@
 import { Gamepad, Search } from "lucide-react";
+import Aside from "../components/Aside";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,15 +20,7 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </header>
-      <aside className="hidden md:block">
-        <h2 className="mb-4 text-2xl font-bold">Genres</h2>
-        <ul className="flex flex-col gap-0.5">
-          <li className="flex gap-1">
-            <img className="size-8 rounded-md" />
-            <p>Action</p>
-          </li>
-        </ul>
-      </aside>
+      <Aside />
       <main className="h-full w-full">{children}</main>
     </div>
   );
