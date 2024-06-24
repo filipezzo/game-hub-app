@@ -7,7 +7,7 @@ export default function Home() {
       <h1 className="-mt-2 text-nowrap text-4xl font-bold">
         PC Simulation Games
       </h1>
-      <section></section>
+
       <GameGrid />
     </Layout>
   );

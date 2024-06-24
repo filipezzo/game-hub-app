@@ -6,8 +6,8 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="row-gap grid h-full grid-cols-[200px_1fr] grid-rows-[60px_1fr] gap-y-4 bg-neutral-900 p-5 text-neutral-100 antialiased">
-      <header className="col-span-full row-span-1">
+    <div className="row-gap grid h-full grid-cols-1 gap-y-4 p-5 text-neutral-100 antialiased md:grid-cols-[240px_1fr] md:grid-rows-[60px_1fr]">
+      <header className="md:col-span-full md:row-span-1">
         <div className="flex w-full items-center gap-4">
           <Gamepad />
           <div className="flex h-12 w-full items-center gap-2 rounded-md bg-neutral-800 p-2">
@@ -28,7 +28,7 @@ export default function Layout({ children }: LayoutProps) {
           </li>
         </ul>
       </aside>
-      <main>{children}</main>
+      <main className="h-full w-full">{children}</main>
     </div>
   );
 }
