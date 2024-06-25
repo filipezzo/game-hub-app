@@ -1,6 +1,7 @@
 import { AxiosError, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import useCtx from "./useCtx";
 
 interface Platform {
   id: number;
@@ -26,6 +27,7 @@ function useGames() {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const { selectedGenre, selectedOption } = useCtx();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -35,6 +37,10 @@ function useGames() {
       try {
         const { data } = await api.get<FetchGamesResponse>("/games", {
           signal: controller.signal,
+          params: {
+            genres: selectedGenre?.id,
+            platforms: selectedOption ?? null,
+          },
         });
         setGames(data.results);
         setError(null);
@@ -53,7 +59,7 @@ function useGames() {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [selectedGenre?.id, selectedOption]);
 
   return {
     games,
